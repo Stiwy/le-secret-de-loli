@@ -1,0 +1,41 @@
+<footer>
+    <div class="footer-content">
+        <div class="header-footer">
+            <h2>Le secret de Loli</h2>
+            <h4><em>Consommer, Raisoner</em></h4>
+        </div>
+        <div class="flex">
+            <div class="reseaux">
+                <h5>Suivez le secret de Loli :</h5>
+                <div class="flex">
+                    <button href="" class="button-reseaux">
+                        <img class="logo-fb" src="{{ asset('assets/img/facebook-le-secret-de-notre-lol.png') }}" alt="facebook-le-secret-de-notre-lol"> 
+                        Notre page facebook
+                    </button>
+                    <button href="" class="button-reseaux">
+                        <img class="logo-insta" src="{{ asset('assets/img/instagram-le-secret-de-notre-lol.png') }}" alt="instagram-le-secret-de-notre-lol"> 
+                        Notre profils instagram
+                    </button>
+                </div>
+            </div>
+            <div class="site-plan">
+                <h5>Notre newsletter</h5>
+
+                <form action="" class="flex">
+                    <div class="form-group" id="newsletter_group_footer">
+                        <span id="newsletter_label_footer"><label for="newsletter_footer">S'inscrire à la newsletter</label></span>
+                        <input 
+                            onfocus='formLabel(document.getElementById("newsletter_group_footer"), document.getElementById("newsletter_label_footer"))'
+                            onfocusout='formPlaceholder(document.getElementById("newsletter_group_footer"), document.getElementById("newsletter_label_footer"), document.getElementById("newsletter_footer"))' type="email" 
+                            id="newsletter_footer" 
+                            name="newsletter_footer"
+                            required
+                        />
+                    </div>
+                    <button class="newsletter-footer-submit">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copy"><small>&copy; Le secret de notre LOL 2021 - 2022 created by EvolutiWeb</small></div>
+</footer>

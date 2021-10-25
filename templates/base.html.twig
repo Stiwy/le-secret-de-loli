@@ -2,18 +2,27 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <title>{% block title %}Accueil{% endblock %} - Le secret de Loli</title>
+        
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            {{ encore_entry_script_tags('app') }}np
         {% endblock %}
+        <script src="{{ asset('assets/js/form.js') }}"></script>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% set url = 'https://127.0.0.1:8000/' %}
+
+        {% include 'header.html.twig' %}
+            
+        <div class="content">
+            {% block body %}{% endblock %}
+            <div class="minSite"></div>
+        </div>
+
+        {% include 'footer.html.twig' %}
     </body>
 </html>
