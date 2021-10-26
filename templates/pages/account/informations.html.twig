@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations{% endblock %}
+
+{% block body %}
+<div class="center-block w6 auto">
+    <h1 class="title-h1">Mes Informations</h1>
+
+    {% if notification %}
+        <div class="alert alert-{{notification.type}}">
+            {{notification.content|raw}}
+        </div>
+    {% endif %}
+
+     <span class="link"><a href="{{ path('app_account') }}"><img src="{{ asset('assets/svg/return.svg') }}" alt=""> Retour</a></span>
+
+    {{ form_start(form) }}
+        <h3 class="title-h3">Information du compte</h3>
+
+        <div class="flex">
+
+            <div class="form w5">
+                <div class="form-group-custom" id="edit_user_information_firstname_group">
+                    <span id="edit_user_information_firstname_label">{{ form_label(form.firstname) }}</span>
+                    {{ form_widget(form.firstname) }}
+                </div>
+                {{ form_errors(form.firstname) }}
+            </div>
+
+            <div class="form w5">
+                <div class="form-group-custom" id="edit_user_information_lastname_group">
+                    <span id="edit_user_information_lastname_label">{{ form_label(form.lastname) }}</span>
+                    {{ form_widget(form.lastname) }}
+                </div>
+                {{ form_errors(form.lastname) }}
+            </div>
+        </div>
+        
+        <div class="flex">
+            <div class="form w7">
+                <div class="form-group-custom" id="edit_user_information_email_group">
+                    <span id="edit_user_information_email_label">{{ form_label(form.email) }}</span>
+                    {{ form_widget(form.email, {'value': app.user.email}) }}
+                </div>
+                {{ form_errors(form.email) }}
+            </div>
+            
+            <div class="form w3">
+                <div class="form-group-custom" id="edit_user_information_phone_group">
+                    <span id="edit_user_information_phone_label">{{ form_label(form.phone) }}</span>
+                    {{ form_widget(form.phone) }}
+                </div>
+                {{ form_errors(form.phone) }}
+            </div>
+        </div>
+
+        <div class="btn btn-warning auto" onclick="document.location.href = '{{ url }}mon-compte/mot-de-passe'">Modifier mon mot de passe</div>
+        
+        <h3 class="title-h3">Adresse de postal</h3>
+
+        <div class="flex">
+            <div class="form w10">
+                <div class="form-group-custom" id="edit_user_information_address_group">
+                    <span id="edit_user_information_address_label">{{ form_label(form.address) }}</span>
+                    {{ form_widget(form.address) }}
+                </div>
+                {{ form_errors(form.address) }}
+            </div>
+        </div>
+
+        <div class="flex">
+            <div class="form w6">
+                <div class="form-group-custom" id="edit_user_information_city_group">
+                    <span id="edit_user_information_city_label">{{ form_label(form.city) }}</span>
+                    {{ form_widget(form.city) }}
+                </div>
+                {{ form_errors(form.city) }}
+            </div>
+
+            <div class="form w4">
+                <div class="form-group-custom" id="edit_user_information_zipCode_group">
+                    <span id="edit_user_information_zipCode_label">{{ form_label(form.zipCode) }}</span>
+                    {{ form_widget(form.zipCode) }}
+                </div>
+                {{ form_errors(form.zipCode) }}
+            </div>
+        </div>
+
+        <div class="btn btn-danger" onclick="delAccount()">Supprimer mon compte</div>
+{{ form_end(form) }}
+</div>
+
+<script>
+    function delAccount() {
+        if (confirm('Souhaitez-vous vraiment supprimer votre compte ?')) {
+            document.location.href = '{{ url }}mon-compte/supprimer';
+        }
+    }
+
+    formInvalid(
+        '{{form.children.firstname.vars.valid}}', 
+        document.getElementById("edit_user_information_firstname_group"), 
+        document.getElementById("edit_user_information_firstname_label"), 
+        document.getElementById("edit_user_information_firstname")
+    )
+
+    formInvalid(
+        '{{form.children.lastname.vars.valid}}', 
+        document.getElementById("edit_user_information_lastname_group"), 
+        document.getElementById("edit_user_information_lastname_label"), 
+        document.getElementById("edit_user_information_lastname")
+    )
+
+    formInvalid(
+        '{{form.children.email.vars.valid}}', 
+        document.getElementById("edit_user_information_email_group"), 
+        document.getElementById("edit_user_information_email_label"), 
+        document.getElementById("edit_user_information_email")
+    )
+
+    formInvalid(
+        '{{form.children.phone.vars.valid}}', 
+        document.getElementById("edit_user_information_phone_group"), 
+        document.getElementById("edit_user_information_phone_label"),
+        document.getElementById("edit_user_information_phone")
+    )
+
+    formInvalid(
+        '{{form.children.address.vars.valid}}', 
+        document.getElementById("edit_user_information_address_group"), 
+        document.getElementById("edit_user_information_address_label"),
+        document.getElementById("edit_user_information_address")
+    )
+    
+    formInvalid(
+        '{{form.children.city.vars.valid}}', 
+        document.getElementById("edit_user_information_city_group"), 
+        document.getElementById("edit_user_information_city_label"),
+        document.getElementById("edit_user_information_city")
+    )
+
+    formInvalid(
+        '{{form.children.zipCode.vars.valid}}', 
+        document.getElementById("edit_user_information_zipCode_group"), 
+        document.getElementById("edit_user_information_zipCode_label"),
+        document.getElementById("edit_user_information_zipCode")
+    )
+
+</script>
+{% endblock %}

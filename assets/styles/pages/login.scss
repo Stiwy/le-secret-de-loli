@@ -1,0 +1,48 @@
+.remember_me {
+    display: flex;
+    align-items: center;
+}
+
+.remember_me label {
+    margin-left: 5px;
+    color: grey;
+    letter-spacing: .8px;
+    font-size: 1rem;
+}
+
+.remember_me input {
+    width: 18px;
+    height: 18px;
+}
+
+.forgot_password {
+    color: grey;
+    text-decoration: none;
+    letter-spacing: .8px;
+    padding-left: 8px;
+    font-size: .8rem;
+    opacity: 0.6;
+}
+
+.forgot_password:hover {
+    color: #6DA926;
+    transition: .4s;
+}
+
+.new_member {
+    color: grey;
+}
+
+.new_member a{
+    color: #6DA926;
+    text-decoration: none;
+}
+
+.new_member a:hover {
+    opacity: 0.5;
+    transition-duration: .8s;
+}
+
+.center-block {
+    min-height: 360px;
+}

@@ -1,0 +1,92 @@
+footer {
+    background-color: #3E3D43;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 20000;
+}
+
+footer h5 {
+    opacity: .5;
+}
+
+.logo-fb, .logo-insta {
+    width: 35px;
+    margin-right: 5px;
+}
+
+#newsletter_label_footer, #newsletter_footer {
+    background-color: #3E3D43;
+}
+
+#newsletter_footer {
+    color: white;
+}
+
+.button-reseaux {    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px;
+    background: unset;
+    color: #6DA926;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 4px 8px;
+    border: #6DA926 solid 2px;
+    filter: grayscale(1);
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.button-reseaux:hover {
+    filter: grayscale(0);
+}
+
+.copy {
+    text-align: center;
+    background-color: #6DA926;
+    color: white;
+    height: 20px;
+    padding: 5px 0;
+    letter-spacing: 1px;
+    font-style: oblique;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.header-footer h2 {
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    opacity: 0.5;
+}
+
+.header-footer h4 {
+    margin: 0px;
+    font-weight: 100;
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+.newsletter-footer-submit {
+    color: #6DA926;
+    background-color: unset;
+    border: #6DA926 solid 2px;
+    margin-left: 3px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    padding: 8px 16px;
+}
+
+.newsletter-footer-submit:hover {
+    background-color: #6DA926;
+    color: white;
+}

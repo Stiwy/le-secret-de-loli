@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+    
+
+    <div class="center-block col-md-5 mt-5">
+        <form method="post">
+
+            <div class="col-md-10 auto">
+                <h1 class="title-h1">Se connecter</h1> 
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% elseif app.request.query.get('inscription') == 'ok' %}
+                    <div class="alert alert-success">
+                        Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.
+                    </div>
+                {% endif %}
+
+                <div class="form">
+                    <div class="form-group" id="login_email_group">
+                        <label for="inputEmail">E-mail</label>
+                        <div class="flex">
+                            <input 
+                                type="email" 
+                                value="{{ last_username }}" 
+                                name="email" 
+                                id="inputEmail" 
+                                class="form-control" 
+                                autocomplete="email" 
+                                required 
+                                autofocus
+                                onfocus =  'formLabel(document.getElementById("login_email_group"), document.getElementById("login_email_label"))',
+                                onfocusout = 'formPlaceholder(document.getElementById("login_email_group"), document.getElementById("login_email_label"), document.getElementById("inputEmail"))'
+                            />
+                            <img style="margin-left: -40px; visibility:hidden;" src="{{ asset('assets/svg/eye.svg') }}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form">
+                    <div class="form-group" id="login_password_group">
+                        <label for="inputPassword">Mot de passe</label> 
+                        <div class="flex">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                id="inputPassword" 
+                                class="form-control" 
+                                autocomplete="current-password" 
+                                required
+                                onfocus =  'formLabel(document.getElementById("login_password_group"), document.getElementById("login_password_label"))',
+                                onfocusout = 'formPlaceholder(document.getElementById("login_password_group"), document.getElementById("login_password_label"), document.getElementById("inputPassword"))'
+                            />
+                            <img style="margin-left: -40px" src="{{ asset('assets/svg/eye.svg') }}" alt="Afficher le mot de passe" onclick='lookPassword(document.getElementById("inputPassword"))'>
+                        </div>
+                    </div>
+                    <small><a class="forgot_password" href="">Mot de passe oublié ?</a></small>
+                </div>
+                
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                <div class="remember_me">
+                    <input type="checkbox" name="_remember_me" id="_remember_me"> 
+                    <label for="_remember_me">Se souvenir de moi ?</label>
+                </div>
+
+                <button class="btn btn-outline-custom f-right" type="submit">
+                    Se connecter
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="w4 auto">
+        <p class="new_member">
+            Vous n'avez pas de compte ? <a href="{{ path('app_register') }}"> S'inscrire</a>
+        </p>
+    </div>
+{% endblock %}

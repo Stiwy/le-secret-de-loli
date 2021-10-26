@@ -1,0 +1,13 @@
+.is_member {
+    color: grey;
+}
+
+.is_member a{
+    color: #6DA926;
+    text-decoration: none;
+}
+
+.is_member a:hover {
+    opacity: 0.5;
+    transition-duration: .8s;
+}

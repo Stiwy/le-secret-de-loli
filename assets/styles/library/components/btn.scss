@@ -1,0 +1,35 @@
+.btn-outline-custom {
+    color: #6DA926;
+    background-color: white;
+    border: #6DA926 solid 2px;
+}
+
+.btn-outline-custom:hover {
+    background-color: #6DA926;
+    color: white;
+    opacity: 1 !important;
+}
+
+.btn-custom {
+    color: white;
+    background-color: #6DA926;
+    border: #6DA926 solid 2px;
+}
+
+.link {
+    color: grey;
+}
+
+.link a{
+    color: #6DA926;
+    text-decoration: none;
+}
+
+.link a:hover {
+    opacity: 0.5;
+    transition-duration: .8s;
+}
+
+.link a img {
+    vertical-align: bottom;
+}

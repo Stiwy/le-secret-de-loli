@@ -1,0 +1,29 @@
+.box {
+    margin: 40px 0px;
+    text-align: center;
+    border: solid grey 2px;
+    border-radius: 8px;
+    opacity: .5;
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.box:hover {
+    border: solid #6DA926 2px;
+    opacity: .6;
+    box-shadow: grey 2px 4px 8px;
+}
+
+.box h3 {
+    color: grey;
+    transition: .4s;
+}
+
+.box:hover h3 {
+    color: #6DA926;
+}
+
+.box img {
+    width: 40px;
+}

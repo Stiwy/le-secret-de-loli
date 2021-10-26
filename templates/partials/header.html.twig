@@ -1,66 +1,72 @@
-<header>
-    <div class="flex">
-        <nav class="flex">
-            <div class="flex"><strong><a class="logo" href="">Le secret de Loli</a></strong></div>
-            <div class="flex nav"><a href="">Le blog</a></div>
-            <div class="flex nav"><a href="">Les produits</a></div>
-            <div class="flex nav"><a href="">Qui sommes-nous ?</a></div>
-            {% if app.user == false %}
-            <div class="flex nav"><a href="{{ path('app_register') }}">Nous rejoindre</a></div>
-            {% endif %}
-            <div class="flex nav"><a href="">Nous contacter</a></div>
-        </nav>
-        <div class="flex">
-            {% if app.user %}
-                <div class="flex nav dropdown dropdown-espace-membre">
-                    <span>Bonjour {{ app.user.firstname }}</span>
-                    <div class="dropdown-list">
-                        <ul>
+<header class="navbar navbar-expand-lg fixed-top">
+    <nav class="container-fluid">
+            <div class="navbar-brand"><strong><a class="logo" href="">Le secret de Loli</a></strong></div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item nav">
+                        <a class="nav-link active" aria-current="page" href="#">Le blog</a>
+                    </li>
+                    <li class="nav-item nav">
+                        <a class="nav-link" href="#">Les produits</a>
+                    </li>
+                    <li class="nav-item nav">
+                        <a class="nav-link" href="#">Qui sommes-nous ?</a>
+                    </li>
+                    <li class="nav-item nav">
+                        <a class="nav-link" href="#">Nous contacter</a>
+                    </li>    
+                </ul>
+                <ul>
+                    {% if app.user %}
+                    <li class="nav-item nav dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bonjour {{ app.user.firstname }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if "ROLE_ADMIN" in app.user.roles %}
                             <li>
-                                <a href="{{ path('app_account') }}">
+                                <a class="dropdown-item" href="{{ path('app_account') }}">
                                     <img src="{{ asset('assets/svg/account.svg') }}" alt="Mon compte">
                                     Administration
                                 </a>
                             </li>
                             {% endif %}
                             <li>
-                                <a href="{{ path('app_account') }}">
+                                <a class="dropdown-item" href="#">
                                     <img src="{{ asset('assets/svg/account.svg') }}" alt="Mon compte">
                                     Mon compte
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_logout') }}">
+                                <a class="dropdown-item" href="#">
                                     <img src="{{ asset('assets/svg/logout.svg') }}" alt="Déconnexion">
                                     Déconnexion
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            {% else %}
-                <div class="flex nav dropdown dropdown-espace-membre">
-                    <span>Espace client</span> 
-                    <div class="dropdown-list">
-                        <ul>
-                            <li>
-                                <a href="{{ path('app_login') }}">
+                    </li>
+                    {% else %}
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Escpace client
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">
                                     <img src="{{ asset('assets/svg/login.svg') }}" alt="Se connecter">
                                     Se connecter
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('app_register') }}">
+                                <a class="dropdown-item" href="#">
                                     <img src="{{ asset('assets/svg/register.svg') }}" alt="Inscription">
                                     S'inscrire
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            {% endif %}
-                <div class="flex nav"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">3</p></div>
-        </div>
-    </div>
+                    </li>
+                    {% endif %}
+                    <li class=" nav"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">3</p></li>
+                </ul>
+            </div>
+    </nav>
 </header>

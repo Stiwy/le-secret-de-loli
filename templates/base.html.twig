@@ -9,20 +9,20 @@
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}np
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
         <script src="{{ asset('assets/js/form.js') }}"></script>
     </head>
     <body>
         {% set url = 'https://127.0.0.1:8000/' %}
 
-        {% include 'header.html.twig' %}
+        {% include 'partials/header.html.twig' %}
             
         <div class="content">
             {% block body %}{% endblock %}
             <div class="minSite"></div>
         </div>
 
-        {% include 'footer.html.twig' %}
+        {% include 'partials/footer.html.twig' %}
     </body>
 </html>

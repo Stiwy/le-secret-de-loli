@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscripton{% endblock %}
+
+{% block body %}
+    <div class="center-block col-md-8 auto">
+        <h1 class="title-h1">Nous rejoindre</h1>
+
+        {% if notification %}
+            <div class="alert alert-{{notification.type}}">
+                {{notification.content|raw}}
+            </div>
+        {% endif %}
+
+        {{ form_start(form) }}
+                <h3 class="title-h3">Information du compte</h3>
+
+                <div class="row">
+
+                    <div class="col-md-6 form-group">
+                        {{ form_row(form.firstname) }}
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        {{ form_row(form.lastname) }}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-7 form-group">
+                        {{ form_row(form.email) }}
+                    </div>
+                    
+                    <div class="col-md-5 form-group">
+                        {{ form_row(form.phone) }}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form_row(form.password.first) }}
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        {{ form_row(form.password.second) }}
+                    </div>
+                </div>
+
+                <h3 class="title-h3">Adresse de postal</h3>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        {{ form_row(form.address) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 form-group">
+                        {{ form_row(form.city) }}
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        {{ form_row(form.zipCode) }}
+                    </div>
+                </div>
+        {{ form_end(form) }}
+    </div>
+
+     <div class="w6 auto">
+        <p class="is_member">
+            Vous avez un compte ? <a href="{{ path('app_login') }}"> Se connecter</a>
+        </p>
+    </div>
+<script>
+    formInvalid(
+        '{{form.children.firstname.vars.valid}}', 
+        document.getElementById("register_firstname_group"), 
+        document.getElementById("register_firstname_label"), 
+        document.getElementById("register_firstname")
+    )
+
+    formInvalid(
+        '{{form.children.lastname.vars.valid}}', 
+        document.getElementById("register_lastname_group"), 
+        document.getElementById("register_lastname_label"), 
+        document.getElementById("register_lastname")
+    )
+
+    formInvalid(
+        '{{form.children.email.vars.valid}}', 
+        document.getElementById("register_email_group"), 
+        document.getElementById("register_email_label"), 
+        document.getElementById("register_email")
+    )
+
+    formInvalid(
+        '{{form.children.phone.vars.valid}}', 
+        document.getElementById("register_phone_group"), 
+        document.getElementById("register_phone_label"),
+        document.getElementById("register_phone")
+    )
+
+    formInvalid(
+        '{{form.children.password.vars.valid}}', 
+        document.getElementById("register_password_first_group"), 
+        document.getElementById("register_password_first_label"),
+        document.getElementById("register_password_first")
+    )
+
+    formInvalid(
+        '{{form.children.password.vars.valid}}', 
+        document.getElementById("register_password_second_group"),
+        document.getElementById("register_password_second_label"),
+        document.getElementById("register_password_second")
+    )
+
+    formInvalid(
+        '{{form.children.address.vars.valid}}', 
+        document.getElementById("register_address_group"), 
+        document.getElementById("register_address_label"),
+        document.getElementById("register_address")
+    )
+    
+    formInvalid(
+        '{{form.children.city.vars.valid}}', 
+        document.getElementById("register_city_group"), 
+        document.getElementById("register_city_label"),
+        document.getElementById("register_city")
+    )
+
+    formInvalid(
+        '{{form.children.zipCode.vars.valid}}', 
+        document.getElementById("register_zipCode_group"), 
+        document.getElementById("register_zipCode_label"),
+        document.getElementById("register_zipCode")
+    )
+
+</script>
+{% endblock %}

@@ -1,2 +1,16 @@
 @import "custom";
+@import "base";
 @import "~bootstrap/scss/bootstrap";
+
+@import "pages/account";
+@import "pages/login";
+@import "pages/register";
+
+@import "partials/header";
+@import "partials/footer";
+
+@import "library/layout";
+@import "library/components/alert";
+@import "library/components/btn";
+@import "library/components/form";
+@import "library/components/title";
