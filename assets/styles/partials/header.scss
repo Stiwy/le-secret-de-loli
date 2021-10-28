@@ -1,44 +1,9 @@
-header {
-    background-color: white;
-    border-top: #6DA926 5px solid;
-    box-shadow: lightgrey 0px 0px 40px;
-    position: fixed;
-    width: 100vw;
-    height: 60px;
-    z-index: 1000;
-}
-
 .logo {
-    font-size: 1.4rem;
     font-family: cursive;
     font-weight: bolder;
     letter-spacing: 1px;
     margin-right: 1rem;
-}
-
-header a, header span {
-    text-decoration: none;
-    color: grey;
-    font-size: 1.1em;
-}
-
-header nav ul {
-    list-style: none;
-}
-
-header div {
-    padding: 0 1rem;
-    height: 60px;
-}
-
-.nav:hover {
-    border-left: lightgrey 1px solid;
-    border-right: lightgrey 1px solid;
-    cursor: pointer;
-}
-
-.nav:hover > a, .nav:hover > span {
-    color: #6DA926;
+    color: grey !important;
 }
 
 .count-cart {
@@ -46,54 +11,11 @@ header div {
     color: white;
     text-align: center;
     width: 30px;
-    top: 7px;
+    top: 20px;
 }
 
-.dropdown-espace-membre, .dropdown-espace-membre .dropdown-list {
-    width: 120px;
-}
-
-.dropdown {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.dropdown-list {
-    position: absolute;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-}
-
-.dropdown-list ul {
-    list-style: none;
-    padding: 0;
-    line-height: 2.6rem;
-    margin-top: 5px;
-}
-
-.dropdown-list a {
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.dropdown-list a img{
-    margin-right: 5px;
-}
-
-.dropdown:hover .dropdown-list {
-    height: auto;   
-    max-height: 160px;
-    top: 60px;
-    transition: 0.5s max-height ease-in-out;
-    border-bottom: solid lightgrey 1px;
-}
-
-.dropdown-list a:hover {
-    color: #6DA926;
-    border-left: #6DA926 solid 2px;
-    padding-left: 5px;
-    transition: .8s color;
+@media screen and (max-width: 992px) {
+    .count-cart {
+        top: 62px;
+    }
 }

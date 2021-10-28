@@ -1,72 +1,121 @@
-<header class="navbar navbar-expand-lg fixed-top">
-    <nav class="container-fluid">
-            <div class="navbar-brand"><strong><a class="logo" href="">Le secret de Loli</a></strong></div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item nav">
-                        <a class="nav-link active" aria-current="page" href="#">Le blog</a>
-                    </li>
-                    <li class="nav-item nav">
-                        <a class="nav-link" href="#">Les produits</a>
-                    </li>
-                    <li class="nav-item nav">
-                        <a class="nav-link" href="#">Qui sommes-nous ?</a>
-                    </li>
-                    <li class="nav-item nav">
-                        <a class="nav-link" href="#">Nous contacter</a>
-                    </li>    
-                </ul>
-                <ul>
-                    {% if app.user %}
-                    <li class="nav-item nav dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<header class="shadow-sm fixed-top border-top border-primary border-5 bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light container-fluid">
+        <div class="row px-3">
+            <div class="col-6 col-lg-2 d-flex text-center">
+                <button 
+                    class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand logo" href="#">Le secret de Loli</a>
+            </div>
+            
+            <form class="col-6">
+                <div class="input-group">
+                    <input 
+                        type="search" 
+                        class="form-control" 
+                        placeholder="Rechercher un produit ..." 
+                        aria-label="Recipient's username" 
+                        aria-describedby="button-addon2"
+                    />
+                    <button 
+                        class="btn btn-primary" 
+                        type="button" 
+                        id="button-addon2"
+                    >
+                        <i class="bi bi-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="col-12 col-lg-4 d-flex justify-content-evenly align-items-start">
+                <button class="btn link-dark">Acceder au blog</button>
+
+                {% if app.user %}
+                    <button class="btn link-primary dropdown">
+                        <a 
+                            class="nav-link dropdown-toggle d-inline" 
+                            href="#" id="navbarDarkDropdownMenuLink" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                        >
                             Bonjour {{ app.user.firstname }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
                             {% if "ROLE_ADMIN" in app.user.roles %}
                             <li>
-                                <a class="dropdown-item" href="{{ path('app_account') }}">
-                                    <img src="{{ asset('assets/svg/account.svg') }}" alt="Mon compte">
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-person-fill"></i>
                                     Administration
                                 </a>
                             </li>
                             {% endif %}
                             <li>
                                 <a class="dropdown-item" href="#">
-                                    <img src="{{ asset('assets/svg/account.svg') }}" alt="Mon compte">
+                                    <i class="bi bi-person-fill"></i>
                                     Mon compte
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">
-                                    <img src="{{ asset('assets/svg/logout.svg') }}" alt="Déconnexion">
+                                    <i class="bi bi-door-closed-fill"></i>
                                     Déconnexion
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    {% else %}
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Escpace client
+                    </button>
+                {% else %}
+                    <button class="btn link-primary dropdown">
+                        <a 
+                            class="nav-link dropdown-toggle d-inline" 
+                            href="#" id="navbarDarkDropdownMenuLink" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                        >
+                            Espace membre
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">
-                                    <img src="{{ asset('assets/svg/login.svg') }}" alt="Se connecter">
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item text-font-grey" href="#">
+                                    <i class="bi bi-person-check-fill"></i>
                                     Se connecter
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    <img src="{{ asset('assets/svg/register.svg') }}" alt="Inscription">
-                                    S'inscrire
+                                <a class="dropdown-item text-font-grey" href="#">
+                                    <i class="bi bi-person-plus-fill"></i>
+                                    Créer un compte
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    {% endif %}
-                    <li class=" nav"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">3</p></li>
-                </ul>
+                    </button>
+                {% endif %}
+
+                <button class="btn"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">3</p></button>
             </div>
+
+            <div class="border-top border-2 border-seconday mt-2">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="#">Bijoux</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>   
     </nav>
 </header>

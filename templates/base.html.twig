@@ -11,7 +11,6 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
-        <script src="{{ asset('assets/js/form.js') }}"></script>
     </head>
     <body>
         {% set url = 'https://127.0.0.1:8000/' %}
@@ -22,7 +21,5 @@
             {% block body %}{% endblock %}
             <div class="minSite"></div>
         </div>
-
-        {% include 'partials/footer.html.twig' %}
     </body>
 </html>

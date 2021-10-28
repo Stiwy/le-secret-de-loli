@@ -1,0 +1,33 @@
+$primary : #6DA926;
+$grey : rgba(223, 221, 221, 0.849);
+$light : white;
+$dark : grey;
+
+.dropdown-item {
+    color: $dark !important;
+}
+
+.dropdown-item:active, .dropdown-item:hover {
+    background-color: white !important;
+    color: $primary !important;
+    opacity: 0.8;
+    border-left: $primary 2px solid;
+}
+
+.nav-item {
+    margin-top: -2px;
+    cursor: pointer;
+}
+
+.nav-item:hover .nav-link{
+    border-top: $primary 2px solid;
+    color: $primary !important;
+}
+
+.btn-outline-primary:hover {
+    color: white !important;
+}
+
+.btn-primary {
+    color: white !important;
+}
