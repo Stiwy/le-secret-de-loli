@@ -254,9 +254,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->insertDate;
     }
 
-    public function setInsertDate(?\DateTimeInterface $insertDate = null): self
+    public function setInsertDate(?\DateTimeInterface $insertDate): self
     {       
-        $this->insertDate = ($insertDate) ? $insertDate : new DateTime();
+        $this->insertDate = $insertDate;
 
         return $this;
     }
@@ -266,19 +266,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFirstname() . ' ' . $this->getLastname();
     }
 
+    public function getAdminNewPassoword(): string
+    {
+        return $this->getPassword();
+    }
+
+    public function setAdminNewPassoword(?string $password)
+    {
+        if ($password)
+             $this->setPassword($password);
+    }
+
     public function getIsAdmin(): bool
     {
-        if (array_search('ROLE_ADMIN', $this->getRoles()))
-            return true;
+        if (array_search("ROLE_ADMIN", $this->getRoles()) == "ROLE_ADMIN")
+            return 1;
         else 
-            return false;
+            return 0;
     }
 
     public function setIsAdmin(bool $isAdmin) 
     {
-        if ($isAdmin)
+        if ($isAdmin == 1)
             $this->setRoles(['ROLE_ADMIN']);
         else 
-            $this->setRoles(['ROLE_USER']);
+            $this->setRoles(['']);
     }
 }

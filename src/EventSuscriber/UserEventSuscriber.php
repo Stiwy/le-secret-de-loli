@@ -3,7 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
+use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -38,10 +38,7 @@ class UserEventSubscriber implements EventSubscriberInterface
         $password = $this->hasher->hashPassword($entity, $entity->getPassword());
         $entity->setPassword($password);
 
-        $entity->setInsertDate();
-
-        $roles = array_map('strtoupper', $$entity->getRoles());
-        $entity->setRoles($roles);
+        $entity->setInsertDate(new DateTime());
     }
 
     public function updateUser(BeforeEntityUpdatedEvent $event)
@@ -52,7 +49,9 @@ class UserEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $password = $this->hasher->hashPassword($entity, $entity->getPassword());
-        $entity->setPassword($password);
+        if (strlen($entity->getPassword()) >= 40 ){
+            $password = $this->hasher->hashPassword($entity, $entity->getPassword());
+            $entity->setPassword($password);
+        }
     }
 }

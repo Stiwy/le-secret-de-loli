@@ -38,11 +38,11 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email', 'E-mail')->setColumns(8),
             IntegerField::new('phone', 'Téléphone')->setColumns(4),
             TextField::new('password', 'Mot de passe')->hideOnIndex()->setColumns(6)->setHelp("Le mot de passe doit contenir au moins : 1 majuscule, 1 miniscule, 1 chiffre."),
-            BooleanField::new('isAdmin', 'Roles')->setColumns(6)->setHelp("L'utilisateur est un administrateur ?")->setCssClass('p5'),
+            BooleanField::new('isAdmin', 'Roles')->setColumns(6)->setHelp("L'utilisateur est un administrateur ?")->setCssClass('p-4')->hideOnDetail(),
             TextField::new('address', 'Adresse')->hideOnIndex()->setColumns(12),
             IntegerField::new('zipCode', 'Code postal')->hideOnIndex()->setColumns(3),
             TextField::new('city', 'Ville')->hideOnIndex()->setColumns(9),
-            DateTimeField::new('insertDate', 'Date d\'inscription')->hideOnIndex()->hideOnForm(),
+            DateTimeField::new('insertDate', 'Date d\'inscription')->hideOnForm()->hideOnIndex(),
         ];
     }
 }

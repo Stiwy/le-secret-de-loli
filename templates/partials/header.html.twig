@@ -1,6 +1,6 @@
 <header class="shadow-sm fixed-top border-top border-primary border-5 bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-light container-fluid">
-        <div class="row px-3">
+        <div class="row col-12 px-3">
             <div class="col-6 col-lg-2 d-flex text-center">
                 <button 
                     class="navbar-toggler" 
@@ -53,20 +53,20 @@
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
                             {% if "ROLE_ADMIN" in app.user.roles %}
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ path('app_admin') }}">
                                     <i class="bi bi-person-fill"></i>
                                     Administration
                                 </a>
                             </li>
                             {% endif %}
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ path('app_account') }}">
                                     <i class="bi bi-person-fill"></i>
                                     Mon compte
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">
                                     <i class="bi bi-door-closed-fill"></i>
                                     Déconnexion
                                 </a>
@@ -86,13 +86,13 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li>
-                                <a class="dropdown-item text-font-grey" href="#">
+                                <a class="dropdown-item text-font-grey" href="{{ path('app_login') }}">
                                     <i class="bi bi-person-check-fill"></i>
                                     Se connecter
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item text-font-grey" href="#">
+                                <a class="dropdown-item text-font-grey" href="{{ path('app_register') }}">
                                     <i class="bi bi-person-plus-fill"></i>
                                     Créer un compte
                                 </a>
@@ -107,12 +107,11 @@
             <div class="border-top border-2 border-seconday mt-2">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% for categorie in categories %}
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="#">Accueil</a>
+                            <a class="nav-link" href="#">{{ categorie.title }}</a>
                         </li>
-                        <li class="nav-item px-2">
-                            <a class="nav-link" href="#">Bijoux</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
