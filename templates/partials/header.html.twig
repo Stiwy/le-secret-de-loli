@@ -107,9 +107,12 @@
             <div class="border-top border-2 border-seconday mt-2">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
                         {% for categorie in categories %}
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="#">{{ categorie.title }}</a>
+                            <a class="nav-link" href="{{ url ~ 'categorie/' ~ categorie.id ~ '/' ~ categorie.slug }}">{{ categorie.title }}</a>
                         </li>
                         {% endfor %}
                     </ul>

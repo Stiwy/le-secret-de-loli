@@ -18,9 +18,9 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="array")
      */
-    private $reference;
+    private $reference = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,7 +33,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $price;
 
@@ -46,11 +46,6 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $primary_image;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $images = [];
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -72,17 +67,42 @@ class Product
      */
     private $id_category;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image4;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $toHide;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReference(): ?string
+    public function getReference(): ?array
     {
         return $this->reference;
     }
 
-    public function setReference(string $reference): self
+    public function setReference(array $reference): self
     {
         $this->reference = $reference;
 
@@ -149,18 +169,6 @@ class Product
         return $this;
     }
 
-    public function getImages(): ?array
-    {
-        return $this->images;
-    }
-
-    public function setImages(array $images): self
-    {
-        $this->images = $images;
-
-        return $this;
-    }
-
     public function getFiles(): ?array
     {
         return $this->files;
@@ -209,14 +217,62 @@ class Product
         return $this;
     }
 
-    public function getOtherImage1(): string 
+    public function getImage2(): ?string
     {
-        return $this->getImages()[1];
+        return $this->image2;
     }
 
-    public function setOtherImage1($oherImage1) 
+    public function setImage2(?string $image2): self
     {
-        array_push($this->getImages(), $oherImage1);
+        $this->image2 = $image2;
+
+        return $this;
+    }
+
+    public function getImage3(): ?string
+    {
+        return $this->image3;
+    }
+
+    public function setImage3(?string $image3): self
+    {
+        $this->image3 = $image3;
+
+        return $this;
+    }
+
+    public function getImage4(): ?string
+    {
+        return $this->image4;
+    }
+
+    public function setImage4(?string $image4): self
+    {
+        $this->image4 = $image4;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getToHide(): ?bool
+    {
+        return $this->toHide;
+    }
+
+    public function setToHide(bool $toHide): self
+    {
+        $this->toHide = $toHide;
 
         return $this;
     }

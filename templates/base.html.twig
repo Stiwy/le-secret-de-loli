@@ -13,7 +13,7 @@
         {% endblock %}
     </head>
     <body>
-        {% set url = 'https://127.0.0.1:8000/' %}
+        {% set url = app.request.server.get('SYMFONY_APPLICATION_DEFAULT_ROUTE_URL') %}
 
         {% include 'partials/header.html.twig' %}
             

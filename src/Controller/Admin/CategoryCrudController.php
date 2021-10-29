@@ -5,7 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -35,7 +37,7 @@ class CategoryCrudController extends AbstractCrudController
             TextField::new('title', 'Nom de la catégorie')->setColumns(7),
             IntegerField::new('inOrder', 'Ordre des catégories')->setColumns(2),
             BooleanField::new('toHide', 'Masquer')->setColumns(3)->setCssClass('p-4')->setHelp('Si choché la catégorie sera masqué'),
-            TextField::new('slug', 'URL')->setColumns(12)->setHelp('Coller le liens complet de la page catégorie')
+            SlugField::new('slug', 'URL')->setColumns(12)->setTargetFieldName('title'),
         ];
     }
 }

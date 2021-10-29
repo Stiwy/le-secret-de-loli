@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.title }}{% endblock %}
+
+{% block body %}
+
+    <div class="center-block col-md-11 auto mt-5">
+        <h1 class="title-h1 h2">Tous les produit de notre catégorie {{ category.title|lower }}</h1>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="card border-none shadow text-center col-md-3">
+                    <img src="/uploads/images/primary/{{ product.primaryImage }}" class="card-img-top border-bottom border-primary" alt="{{ product.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title h6">{{ product.title }}</h5>
+                        <p class="card-text h4 text-primary">{{ (product.price / 100)|number_format(2, ',', '.') }} €</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
