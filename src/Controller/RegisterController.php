@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,10 +16,13 @@ class RegisterController extends AbstractController
 {
 
     private $entityManager;
+    private $categories;
 
     public function __construct(EntityManagerInterface $entityManager) 
     {
         $this->entityManager = $entityManager;
+        $this->categories = $this->entityManager->getRepository(Category::class)->findBy(['toHide' => 0], ['inOrder' => 'asc']);
+
     }
 
     /**
@@ -38,7 +42,7 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted()) {
             $user = $form->getData();
-            $emailExist = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+            $emailExist = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
 
             if ($form->isValid()) {
                 $password = $hasher->hashPassword($user, $user->getPassword());
@@ -58,7 +62,8 @@ class RegisterController extends AbstractController
 
         return $this->render('pages/register/index.html.twig', [
             'form' => $form->createView(),
-            'notification' => $notification
+            'notification' => $notification,
+            'categories' => $this->categories
         ]);
     }
 }

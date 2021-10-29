@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,6 +11,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    private $entityManager;
+    private $categories;
+
+    public function __construct(EntityManagerInterface $entityManager) 
+    {
+        $this->entityManager = $entityManager;
+        $this->categories = $this->entityManager->getRepository(Category::class)->findBy(['toHide' => 0], ['inOrder' => 'asc']);
+
+    }
+
     /**
      * @Route("/connexion", name="app_login")
      */
@@ -23,7 +35,11 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('pages/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('pages/security/login.html.twig', [
+            'last_username' => $lastUsername, 
+            'error' => $error,
+            'categories' => $this->categories
+        ]);
     }
 
     /**

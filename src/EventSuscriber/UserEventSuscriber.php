@@ -49,7 +49,7 @@ class UserEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (strlen($entity->getPassword()) >= 40 ){
+        if (strlen($entity->getPassword()) <= 40 ){
             $password = $this->hasher->hashPassword($entity, $entity->getPassword());
             $entity->setPassword($password);
         }
