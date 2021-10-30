@@ -1,0 +1,40 @@
+.article-box {
+    border-radius: 15px;
+    text-align: center;
+    border: whitesmoke .5px solid;
+    padding: 0px;
+}
+
+.article-image {
+    position: relative;
+}
+
+.article-text {
+    background: white;
+    border-radius: 0px 0px 7px 7px;
+    padding: 6px 20px;
+    transition: 1s background, color 0s ease-in-out;
+}
+
+.article-filter {
+    opacity: 0;
+    background: rgba(128, 128, 128, .5);
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding-top: 50%;
+    border-radius: 5px;
+    color: #fff;
+    transition: 1s opacity 0s ease-in-out;
+}
+
+.article-box:hover .article-filter {
+    opacity: 1;
+}
+
+.article-box:hover .article-text {
+    background-color: rgb(83, 83, 83);
+    color: white ;
+}

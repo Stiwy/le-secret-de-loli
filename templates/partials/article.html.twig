@@ -1,0 +1,21 @@
+<div class="row justify-content-between">
+    {% for product in products %}
+        <div class="{{ articleLayout }}">
+            <div class="article-box">
+                <div class="article-body">
+                    <div class="article-image">
+                        <img src="/uploads/images/primary/{{ product.primaryImage }}" class="card-img-top border-bottom border-primary" alt="{{ product.title }}">
+                        <div class="article-filter">
+                            <button class="btn btn-secondary">Voir le produits</button></br>
+                            <button class="btn btn-primary mt-2">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    <div class="article-text">
+                        <h5 class="article-title h6">{{ product.title }}</h5>
+                        <p class="article-text h4 text-primary">{{ (product.price / 100)|number_format(2, ',', '.') }} €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
