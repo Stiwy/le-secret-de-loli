@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -91,6 +93,26 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $toHide;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reference::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $referencesProduct;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $primaryReference;
+
+    public function __construct()
+    {
+        $this->referencesProduct = new ArrayCollection();
+    }
+
+    public function __toString() 
+    {
+        return "#" . $this->getId() . ' - ' . $this->getTitle();
+    }
 
     public function getId(): ?int
     {
@@ -273,6 +295,48 @@ class Product
     public function setToHide(bool $toHide): self
     {
         $this->toHide = $toHide;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reference[]
+     */
+    public function getReferencesProduct(): Collection
+    {
+        return $this->referencesProduct;
+    }
+
+    public function addReferencesProduct(Reference $referencesProduct): self
+    {
+        if (!$this->referencesProduct->contains($referencesProduct)) {
+            $this->referencesProduct[] = $referencesProduct;
+            $referencesProduct->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReferencesProduct(Reference $referencesProduct): self
+    {
+        if ($this->referencesProduct->removeElement($referencesProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($referencesProduct->getProduct() === $this) {
+                $referencesProduct->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPrimaryReference(): ?string
+    {
+        return $this->primaryReference;
+    }
+
+    public function setPrimaryReference(string $primaryReference): self
+    {
+        $this->primaryReference = $primaryReference;
 
         return $this;
     }

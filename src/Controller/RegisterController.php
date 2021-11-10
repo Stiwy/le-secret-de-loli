@@ -8,6 +8,7 @@ use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,9 @@ class RegisterController extends AbstractController
     private $entityManager;
     private $categories;
 
-    public function __construct(EntityManagerInterface $entityManager) 
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack) 
     {
+        $this->requestStack = $requestStack;
         $this->entityManager = $entityManager;
         $this->categories = $this->entityManager->getRepository(Category::class)->findBy(['toHide' => 0], ['inOrder' => 'asc']);
 
@@ -30,6 +32,10 @@ class RegisterController extends AbstractController
      */
     public function index(Request $request, UserPasswordHasherInterface $hasher): Response
     {
+
+        $session = $this->requestStack->getSession();
+        $sessionCard = $session->get('cardSession');
+
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
@@ -61,6 +67,7 @@ class RegisterController extends AbstractController
         }
 
         return $this->render('pages/register/index.html.twig', [
+            'sessionCard' => $sessionCard,
             'form' => $form->createView(),
             'notification' => $notification,
             'categories' => $this->categories

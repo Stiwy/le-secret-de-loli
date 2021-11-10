@@ -9,6 +9,7 @@ use App\Form\EditUserInformationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,9 @@ class AccountController extends AbstractController
     private $entityManager;
     private $categories;
 
-    public function __construct(EntityManagerInterface $entityManager) 
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack) 
     {
+        $this->requestStack = $requestStack;
         $this->entityManager = $entityManager;
         $this->categories = $this->entityManager->getRepository(Category::class)->findBy(['toHide' => 0], ['inOrder' => 'asc']);
     }
@@ -29,7 +31,11 @@ class AccountController extends AbstractController
      */
     public function index(): Response
     {
+        $session = $this->requestStack->getSession();
+        $sessionCard = $session->get('cardSession');
+
         return $this->render('pages/account/index.html.twig', [
+            'sessionCard' => $sessionCard,
             'categories' => $this->categories
         ]);
     }
@@ -43,6 +49,9 @@ class AccountController extends AbstractController
         $notification = null;
         $user = $this->getUser();
         $form = $this->createForm(EditUserInformationType::class, $user);
+
+        $session = $this->requestStack->getSession();
+        $sessionCard = $session->get('cardSession');
 
         $form->handleRequest($request);
 
@@ -62,6 +71,7 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/informations.html.twig', [
+            'sessionCard' => $sessionCard,
             'form' => $form->createView(),
             'notification' => $notification,
             'categories' => $this->categories
@@ -73,6 +83,10 @@ class AccountController extends AbstractController
      */
     public function editPassword(Request $request, UserPasswordHasherInterface $hasher): Response
     {
+
+        $session = $this->requestStack->getSession();
+        $sessionCard = $session->get('cardSession');
+
         $notification = null;
         $user = $this->getUser();
         $form = $this->createForm(EditPasswordType::class, $user);
@@ -97,6 +111,7 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/password.html.twig', [
+            'sessionCard' => $sessionCard,
             'form' => $form->createView(),
             'notification' => $notification,
             'categories' => $this->categories

@@ -1,18 +1,17 @@
 <div class="row justify-content-between">
-    {% for product in products %}
+    {% for article in articles %}
         <div class="{{ articleLayout }}">
             <div class="article-box">
                 <div class="article-body">
                     <div class="article-image">
-                        <img src="/uploads/images/primary/{{ product.primaryImage }}" class="card-img-top border-bottom border-primary" alt="{{ product.title }}">
+                        <img src="/uploads/images/primary/{{ article.primaryImage }}" class="card-img-top border-bottom border-primary" alt="{{ article.title }}">
                         <div class="article-filter">
-                            <button class="btn btn-secondary">Voir le produits</button></br>
-                            <button class="btn btn-primary mt-2">Ajouter au panier</button>
+                            <a class="btn btn-secondary" href="{{ url ~ 'produit/' ~ article.idCategory.slug ~ '/' ~  article.slug }}">Voir le produits</a>
                         </div>
                     </div>
                     <div class="article-text">
-                        <h5 class="article-title h6">{{ product.title }}</h5>
-                        <p class="article-text h4 text-primary">{{ (product.price / 100)|number_format(2, ',', '.') }} €</p>
+                        <h5 class="article-title h6">{{ article.title|slice(0, 52) }}</h5>
+                        <p class="article-text h4 text-primary">{{ (article.price / 100)|number_format(2, ',', '.') }} €</p>
                     </div>
                 </div>
             </div>

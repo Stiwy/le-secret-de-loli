@@ -39,7 +39,7 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            ArrayField::new('reference', 'Référrence')->setColumns(4),
+            IdField::new('id', 'Id')->onlyOnIndex(),
             TextField::new('title', 'Titre')->setColumns(8),
             BooleanField::new('toHide', 'Masquer le produits')->setColumns(6)->setCssClass('mt-4')->setHelp('Si cocher le produits sera masqué'),
             ArrayField::new('keywork', 'Mots clés')->setColumns(6),
