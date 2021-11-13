@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}{{ product.product.title }}{% endblock %}
 
 {% block body %}
+    {# Fil d'Ariane de la page #}
     <div class="col-md-11 auto mt-2">
         <small class="text-primary">
             <a href="{{ path('app_home') }}">Le secret de Loli</a> / 
@@ -10,39 +11,70 @@
             <a href=""> {{ product.product.title }} </a>
         </small>
     </div>
-    <div class="center-block col-md-11 auto mt-5">
+    
+    <div class="center-block col-md-11 auto mt-5 show-product-block">
         <div class="row mb-5">
+            {# Partie Affichant les images - colonne de gauche#}
             <div class="col-md-5">
                 <div class="text-center">
-                    <img class="img-thumbnail" width="100%" src="/uploads/images/reference/{{ asset(product.image) }}" alt="{{ product.product.title }}">
+                    <img 
+                        id="show-product-primary-image" 
+                        class="img-thumbnail" 
+                        alt="{{ product.product.title }}"
+                        src="/uploads/images/others/{{ product.product.image }}"
+                        alt="{{ product.product.title }}"
+                    >
                 </div>
                 <div class="row mt-3 justify-content-between">
                     <div class="col-md-3">
                         {% if product.product.image != "" %}
-                            <img class="img-fluid img-thumbnail" src="/uploads/images/others/{{ product.product.image }}">
+                            <img 
+                                id="show-product-image" 
+                                class="img-thumbnail image-secondary-product"
+                                src="/uploads/images/others/{{ product.product.image }}"
+                                alt="{{ product.product.title }}"
+                            >
                         {% endif %}
                     </div>
 
                     <div class="col-md-3">
                         {% if product.product.image2 != "" %}
-                            <img class="img-fluid img-thumbnail" src="/uploads/images/others/{{ product.product.image2 }}">
+                            <img 
+                                id="show-product-image2" 
+                                class="img-thumbnail image-secondary-product"
+                                src="/uploads/images/others/{{ product.product.image2 }}"
+                                alt="{{ product.product.title }}"
+                            >
                         {% endif %}
                     </div>
 
                     <div class="col-md-3">
                         {% if product.product.image3 != "" %}
-                            <img class="img-fluid img-thumbnail" src="/uploads/images/others/{{ product.product.image3 }}">
+                            <img 
+                                id="show-product-image3" 
+                                class="img-thumbnail image-secondary-product"
+                                src="/uploads/images/others/{{ product.product.image3 }}"
+                                alt="{{ product.product.title }}"
+                            >
                         {% endif %}
                     </div>
 
                     <div class="col-md-3">
                         {% if product.product.image4 != "" %}
-                            <img class="img-fluid img-thumbnail" src="/uploads/images/others/{{ product.product.image4 }}">
+                            <img 
+                                id="show-product-image4" 
+                                class="img-thumbnail image-secondary-product"
+                                src="/uploads/images/others/{{ product.product.image4 }}"
+                                alt="{{ product.product.title }}"
+                            >
                         {% endif %}
                     </div>
                 </div>
             </div>
+
+            {# Partie Affichant le détails produits - colonne du centre  #}
             <div class="col-md-5">
+                {# Partie affichant le titre du produit et de la référence en lecture plus les avis #}
                 <div id="product-head">
                     <h1 class="h2 text-start text-dark"> {{ product.product.title }} - {{ product.subTitle }} </h1>
                     <div class="row justify-content-start">
@@ -61,6 +93,7 @@
 
                 <hr>
 
+                {# Partie affichant le prix #}
                 <div id="product-price" class="row justify-content-between mt-3">
                     <div class="col-md-5">
                         <p class="text-dark">
@@ -76,14 +109,17 @@
                     </div>
                 </div>
 
-                <div id="associate-reference" class="mt-4">
-                    {% for reference in products %}
-                        <a href="/produit/{{ product.product.idCategory.slug }}/{{ product.product.slug }}/{{ reference.reference }}" class="btn btn-outline-secondary d-inline">{{reference.subTitle}}</a>
-                    {% endfor %}
-                </div>
+                {# Partie listant les rédérences associées #}
+                {% if (products|length > 1) %}
+                    <div id="associate-reference" class="mt-4">
+                        {% for reference in products %}
+                            <a href="/produit/{{ product.product.idCategory.slug }}/{{ product.product.slug }}/{{ reference.reference }}" class="btn btn-outline-secondary d-inline">{{reference.subTitle}}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
                 <hr>
-
+                {# Formulaire d'ajout au panier #}
                 <div>
                     {{ form_start(addCard) }}
                         <div class="row align-items-end">
@@ -97,15 +133,39 @@
                     {{ form_end(addCard) }}
                 </div>
 
+                {# Déscription du produit et de la référence #}
                 <div id="product-description" class="product_desciption text-dark mt-5">
                     {{ product.product.description|raw }}
                     {{ product.subDescription|raw }}
                 </div>
             </div>
-            <div class="col-md-2">
+
+            {# Partie récapitulatif du panier en cours - colonne de droite #}
+            <div class="col-md-2 card-summary border border-2 border-grey rounded">
+                <h2 class="text-primary text-center">Mon panier</h2>
+                {% set some = 0 %}
+                {% for card in sessionCard %}
+                    <div class="border-bottom border-1 border-primary m-2 p-1">
+                        <p>{{ card.title|slice(0, 100) }}</p>
+                        <p class="row">
+                            <small class="col-6">Qte <b>{{ card.quantity }}</b></small>
+                            <b class="col-6 text-danger">{{ card.price }} €</b>
+                        </p>
+                    </div>
+                    {% set some = some + card.price %}
+                {% endfor %}
+                <div>
+                    <p class="fw-bold">Total : <span class="float-end text-danger h4">{{ some|number_format(2) }} €</span></p>
+
+                    <a href="" class="btn btn-primary w-100 mt-4">Passer commande</a>
+
+                </div>
             </div>
         </div>
+
         <hr>
+        
+        {# Partie listant les produits de la catégories #}
         <div class="mt-5 pt-3">
             <h2 class="text-dark">Nos produits associées</h2>
             <div class="row mt-4">
@@ -115,3 +175,4 @@
         </div>
     </div>
 {% endblock %}
+

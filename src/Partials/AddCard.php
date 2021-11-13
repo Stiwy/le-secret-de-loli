@@ -14,6 +14,8 @@ class AddCard
         if ($addCard->isSubmitted() && $addCard->isValid()) {
             $card = $addCard->getData();
             $card->reference = $product[0]->getReference();
+            $card->title = $product[0]->getProduct()->getTitle() . ' ' . $product[0]->getSubTitle();
+            $card->price = number_format($product[0]->getProduct()->getPrice()/100, 2);
 
             if (isset($sessionCard[$card->reference])) {
                 $sessionCard[$card->reference]->quantity += $card->quantity;

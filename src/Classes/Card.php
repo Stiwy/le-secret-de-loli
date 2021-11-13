@@ -13,4 +13,14 @@ class Card
     * @var int
     */
     public $quantity;
+
+    /**
+     * @var string
+     */
+    public $title;
+
+    /**
+     * @var float
+     */
+    public $price;
 }
