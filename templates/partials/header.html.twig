@@ -101,15 +101,18 @@
                     </button>
                 {% endif %}
 
-                <button class="btn"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">3</p></button>
+                <button class="btn"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">{{ sessionCard|length }}</p></button>
             </div>
 
             <div class="border-top border-2 border-seconday mt-2">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item px-2">
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
                         {% for categorie in categories %}
                         <li class="nav-item px-2">
-                            <a class="nav-link" href="#">{{ categorie.title }}</a>
+                            <a class="nav-link" href="{{ url ~ 'categorie/' ~ categorie.slug }}">{{ categorie.title }}</a>
                         </li>
                         {% endfor %}
                     </ul>

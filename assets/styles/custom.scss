@@ -31,3 +31,9 @@ $dark : grey;
 .btn-primary {
     color: white !important;
 }
+
+.card:hover {
+    opacity: 0.8 !important;
+    filter: grayscale(0.3) !important;
+    cursor: pointer;
+}

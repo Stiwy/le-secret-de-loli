@@ -3,7 +3,11 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-    background-color: whitesmoke !important;
+    // background-color: whitesmoke !important;
+    background-image: url('../../public/assets/img/background.png');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: 50%;
 }
 
 .content {

@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class CategoryController extends AbstractController
 {
     private $entityManager;
     private $categories;
@@ -19,21 +20,24 @@ class HomeController extends AbstractController
         $this->requestStack = $requestStack;
         $this->entityManager = $entityManager;
         $this->categories = $this->entityManager->getRepository(Category::class)->findBy(['toHide' => 0], ['inOrder' => 'asc']);
-
     }
-
+    
     /**
-     * @Route("/", name="app_home")
+     * @Route("/categorie/{slug}", name="category")
      */
-    public function index(): Response
+    public function index($slug): Response
     {
+        $category = $this->entityManager->getRepository(Category::class)->findOneBy(['slug' => $slug]);
+        $articles = $this->entityManager->getRepository(Product::class)->findBy(['id_category' => $category->getId(), 'toHide' => 0]);
 
-        $session = $this->requestStack->getSession();
+        $session = $this->requestStack->getSession();   
         $sessionCard = $session->get('cardSession');
 
-        return $this->render('pages/home/index.html.twig', [
+        return $this->render('pages/category/index.html.twig', [
             'sessionCard' => $sessionCard,
-            'categories' => $this->categories
+            'categories' => $this->categories,
+            'articles' => $articles,
+            'category' => $category
         ]);
     }
 }
