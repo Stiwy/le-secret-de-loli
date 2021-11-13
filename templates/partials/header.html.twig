@@ -101,7 +101,7 @@
                     </button>
                 {% endif %}
 
-                <button class="btn"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">{{ sessionCard|length }}</p></button>
+                <a href="{{ path('app_cart_sumary') }}" class="btn"><img src="{{ asset('assets/svg/cart.svg') }}" alt=""><p class="count-cart">{{ sessionCard|length }}</p></a>
             </div>
 
             <div class="border-top border-2 border-seconday mt-2">

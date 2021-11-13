@@ -149,15 +149,15 @@
                         <p>{{ card.title|slice(0, 100) }}</p>
                         <p class="row">
                             <small class="col-6">Qte <b>{{ card.quantity }}</b></small>
-                            <b class="col-6 text-danger">{{ card.price }} €</b>
+                            <b class="col-6 text-danger">{{ (card.price * card.quantity)|number_format(2) }} €</b>
                         </p>
                     </div>
-                    {% set some = some + card.price %}
+                    {% set some = some + (card.price * card.quantity) %}
                 {% endfor %}
                 <div>
                     <p class="fw-bold">Total : <span class="float-end text-danger h4">{{ some|number_format(2) }} €</span></p>
 
-                    <a href="" class="btn btn-primary w-100 mt-4">Passer commande</a>
+                    <a href="{{ path('app_cart_sumary') }}" class="btn btn-primary w-100 mt-4">Passer commande</a>
 
                 </div>
             </div>
@@ -175,4 +175,7 @@
         </div>
     </div>
 {% endblock %}
+
+
+
 

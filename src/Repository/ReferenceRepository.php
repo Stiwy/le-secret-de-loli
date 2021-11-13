@@ -53,14 +53,12 @@ class ReferenceRepository extends ServiceEntityRepository
     /**
     * @return Product[] Returns an array of Product objects
     */
-    public function findProductByReference($slug, $reference)
+    public function findProductByReference($reference)
     {
         return $this->createQueryBuilder('r')
             ->select('r', 'p')
             ->join('r.product', 'p')
-            ->andWhere('p.slug = :slug')
             ->andWhere('r.reference = :reference')
-            ->setParameter('slug', $slug)
             ->setParameter('reference', $reference)
             ->getQuery()
             ->getResult()

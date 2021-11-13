@@ -43,7 +43,7 @@ class ProductController extends AbstractController
         AddCard::index($addCard, $session, $product, $request);        
         $sessionCard = $session->get('cardSession');
 
-        return $this->render('product/index.html.twig', [
+        return $this->render('pages/product/index.html.twig', [
             'sessionCard' => $sessionCard,
             'product' => $product[0],
             'products' => $products,
@@ -58,7 +58,7 @@ class ProductController extends AbstractController
      */
     public function showReference($slug, $reference, Request $request): Response
     {
-        $product = $this->entityManager->getRepository(Reference::class)->findProductByReference($slug, $reference);
+        $product = $this->entityManager->getRepository(Reference::class)->findProductByReference($reference);
         $products = $this->entityManager->getRepository(Reference::class)->findAllReferencesOfProduct($slug);
         $articles = $this->entityManager->getRepository(Product::class)->findBy(['id_category' => $product[0]->getProduct()->getIdCategory()->getId(), 'toHide' => 0]);
 
@@ -68,7 +68,7 @@ class ProductController extends AbstractController
         AddCard::index($addCard, $session, $product, $request);        
         $sessionCard = $session->get('cardSession');
 
-        return $this->render('product/index.html.twig', [
+        return $this->render('pages/product/index.html.twig', [
             'sessionCard' => $sessionCard,
             'product' => $product[0],
             'products' => $products,
